@@ -4,10 +4,9 @@
 	"displayName" : "ScriptableObject Guid Management",
 	"description" : "A system for auto managing guids on all newly created ScriptableObjects that implement IGuidObject. Also handles SO duplication",
 	"unity": "2019.4",
-	"author" : {
-		"name : "Theformand"
-		"email" : "noneyabidness@getalife.com"
+	"author": {
+		"name" : "Theformand",
+		"email" : "noneyabidness@getalife.com",
 		"url " :""
 	}
-	
 }
