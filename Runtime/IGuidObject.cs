@@ -1,5 +1,5 @@
 ﻿
-namespace Utils.ScriptableObjectId
+namespace ScriptableObjectGuids
 {
 
     public interface IGuidObject

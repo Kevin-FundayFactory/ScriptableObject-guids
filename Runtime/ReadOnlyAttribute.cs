@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Utils.Attributes
+namespace ScriptableObjectGuids.Attributes
 {
     public class ReadOnlyAttribute : PropertyAttribute { }
 }

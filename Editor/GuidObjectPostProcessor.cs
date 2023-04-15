@@ -1,8 +1,7 @@
 using UnityEditor;
 using UnityEngine;
-namespace Utils.ScriptableObjectId
+namespace ScriptableObjectGuids
 {
-
     public class GuidObjectPostProcessor : AssetPostprocessor
     {
         private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)

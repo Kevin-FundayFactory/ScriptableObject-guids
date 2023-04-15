@@ -1,7 +1,7 @@
 using System;
-using Utils.Attributes;
+using ScriptableObjectGuids.Attributes;
 
-namespace Utils.ScriptableObjectId
+namespace ScriptableObjectGuids
 {
     [Serializable]
     public class GuidObject
