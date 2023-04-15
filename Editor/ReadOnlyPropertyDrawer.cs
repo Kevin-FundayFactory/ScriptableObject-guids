@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-using ScriptableObjectGuids.Attributes;
+using ScriptableObjectGuids;
 
 [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ReadOnlyPropertyDrawer : PropertyDrawer

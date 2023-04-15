@@ -1,5 +1,4 @@
 using System;
-using ScriptableObjectGuids.Attributes;
 
 namespace ScriptableObjectGuids
 {
