@@ -1,15 +1,16 @@
 using UnityEditor;
 using UnityEngine;
-using ScriptableObjectGuids;
-
-[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-public class ReadOnlyPropertyDrawer : PropertyDrawer
+namespace ScriptableObjectGuids
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    public class ReadOnlyPropertyDrawer : PropertyDrawer
     {
-        var previousGUIState = GUI.enabled;
-        GUI.enabled = false;
-        EditorGUI.PropertyField(position, property, label);
-        GUI.enabled = previousGUIState;
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            var previousGUIState = GUI.enabled;
+            GUI.enabled = false;
+            EditorGUI.PropertyField(position, property, label);
+            GUI.enabled = previousGUIState;
+        }
     }
 }
