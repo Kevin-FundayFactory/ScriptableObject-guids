@@ -1,8 +1,8 @@
 {
 	"name" : "com.theformand.scriptableobjectguids",
-	"version" : "1.0.4",
+	"version" : "1.0.5",
 	"displayName" : "ScriptableObject Guid Management",
-	"description" : "A system for auto managing guids on all newly created ScriptableObjects that implement IGuidObject. Also handles SO duplication",
+	"description" : "A system for auto managing guids on all newly created ScriptableObjects that has a member of type GuidObject. Also handles SO duplication",
 	"unity": "2019.4",
 	"author": {
 		"name" : "Theformand",

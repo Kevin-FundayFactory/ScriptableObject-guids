@@ -1,3 +1,5 @@
+using System.Reflection;
+using System;
 using UnityEditor;
 using UnityEngine;
 namespace ScriptableObjectGuids
@@ -9,27 +11,48 @@ namespace ScriptableObjectGuids
             int dirtyCount = 0;
             foreach (var path in importedAssets)
             {
-                var obj = AssetDatabase.LoadAssetAtPath<Object>(path);
-                if (obj is IGuidObject gu && obj is ScriptableObject so)
+                var so = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
+                if (so && HasGuidObjectMember(so, out string fieldName))
                 {
-                    if (string.IsNullOrEmpty(gu.GuidObject.GuidString) || IsGuidDuplicate(so, path))
+                    var guidObj = GetGuidObject(so, fieldName);
+                    if (string.IsNullOrWhiteSpace(guidObj?.GuidString) || IsGuidDuplicate(so, guidObj, path))
                     {
-                        gu.GuidObject.RefreshGuid();
+                        guidObj.RefreshGuid();
                         dirtyCount++;
-                        EditorUtility.SetDirty(obj);
+                        EditorUtility.SetDirty(so);
                     }
                 }
             }
-            if (dirtyCount > 0)
-            {
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
-            }
         }
 
-        private static bool IsGuidDuplicate(ScriptableObject so, string path)
+        private static GuidObject GetGuidObject(ScriptableObject so, string fieldName)
         {
-            var iGuid = so as IGuidObject;
+            FieldInfo guidField = so.GetType().GetField(fieldName);
+            return guidField.GetValue(so) as GuidObject;
+        }
+
+        private static bool HasGuidObjectMember(ScriptableObject so, out string fieldName)
+        {
+            var type = so.GetType();
+            fieldName = "";
+            FieldInfo[] fields = type.GetFields(
+            BindingFlags.Public |
+            BindingFlags.NonPublic | BindingFlags.Static |
+            BindingFlags.Instance | BindingFlags.DeclaredOnly);
+
+            foreach (FieldInfo info in fields)
+            {
+                if (info.FieldType == typeof(GuidObject))
+                {
+                    fieldName = info.Name;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static bool IsGuidDuplicate(ScriptableObject so, GuidObject guidObj, string path)
+        {
             var folderPath = path.Replace("/" + so.name + ".asset", "");
             var siblingAssets = AssetDatabase.FindAssets("t: ScriptableObject", new string[] { folderPath });
             for (int i = 0; i < siblingAssets.Length; i++)
@@ -38,11 +61,14 @@ namespace ScriptableObjectGuids
                 if (sibling == so)
                     continue;
 
-                if (sibling is IGuidObject gu && gu.GuidObject.GuidString.Equals(iGuid.GuidObject.GuidString))
-                    return true;
+                if (HasGuidObjectMember(sibling,out var fieldName))
+                {
+                    var siblingGuid = GetGuidObject(sibling, fieldName);
+                    if (siblingGuid.GuidString.Equals(guidObj.GuidString))
+                        return true;
+                }
             }
             return false;
         }
     }
-
 }
