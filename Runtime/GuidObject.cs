@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace ScriptableObjectGuids
 {
@@ -7,6 +8,7 @@ namespace ScriptableObjectGuids
     {
         [ReadOnly] //Useful to look at in the Editor
         public string GuidString;
+        [SerializeField]
         public Guid Guid;
 
         public void RefreshGuid()
