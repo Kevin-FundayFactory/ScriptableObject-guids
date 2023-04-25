@@ -1,8 +1,12 @@
 {
-    "name": "Runtime",
-    "rootNamespace": "",
-    "references": [],
-    "includePlatforms": [],
+    "name": "ScriptableObjectGuids.Editor",
+    "rootNamespace": "ScriptableObjectGuids.Editor",
+    "references": [
+        "GUID:1aaa2ab367168cf428a78537643a83d3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
