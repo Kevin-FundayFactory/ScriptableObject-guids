@@ -38,7 +38,7 @@ namespace ScriptableObjectGuids
             FieldInfo[] fields = type.GetFields(
             BindingFlags.Public |
             BindingFlags.NonPublic | BindingFlags.Static |
-            BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            BindingFlags.Instance);
 
             foreach (FieldInfo info in fields)
             {
@@ -61,7 +61,7 @@ namespace ScriptableObjectGuids
                 if (sibling == so)
                     continue;
 
-                if (HasGuidObjectMember(sibling,out var fieldName))
+                if (HasGuidObjectMember(sibling, out var fieldName))
                 {
                     var siblingGuid = GetGuidObject(sibling, fieldName);
                     if (siblingGuid.GuidString.Equals(guidObj.GuidString))
