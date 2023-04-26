@@ -15,7 +15,7 @@ namespace ScriptableObjectGuids
                 if (so && HasGuidObjectMember(so, out string fieldName))
                 {
                     var guidObj = GetGuidObject(so, fieldName);
-                    if (string.IsNullOrWhiteSpace(guidObj?.GuidString) || IsGuidDuplicate(so, guidObj, path))
+                    if (string.IsNullOrWhiteSpace(guidObj?.GuidString) || IsGuidDuplicate(so, guidObj, path) || guidObj.GuidString.Equals(Guid.Empty.ToString()))
                     {
                         guidObj.RefreshGuid();
                         dirtyCount++;
